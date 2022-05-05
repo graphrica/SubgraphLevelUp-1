@@ -1,0 +1,32 @@
+type Account @entity {
+  id: ID!
+  address: Bytes!
+}
+
+type Collectible @entity {
+  id: ID!
+  collection: Collection!
+
+  owner: Account!
+  creator: Account!
+
+  tokenId: BigInt!
+  descriptorURI: String!
+
+  #timestamps
+  modified: BigInt
+  created: BigInt
+  removed: BigInt
+
+  #Metadata
+  name: String
+  description: String
+
+}
+
+type Collection @entity {
+  id: ID!
+  collectionName: String!
+  collectionSymbol: String! 
+  collectionAddress: Bytes!
+}
