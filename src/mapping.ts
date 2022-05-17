@@ -22,14 +22,14 @@ export function handleTransfer(event: Transfer): void {
       collectible.creator = to.id;
       collectible.created = event.block.timestamp;
 
-      let erc721Contract = ERC721.bind(event.address);
-      let descriptorUri = erc721Contract.try_tokenURI(event.params.tokenId);
-      if(!descriptorUri.reverted)
-      {
-        collectible.descriptorURI = descriptorUri.value;
-      }else{
-        collectible.descriptorURI = "";
-      }
+      // let erc721Contract = ERC721.bind(event.address);
+      // let descriptorUri = erc721Contract.try_tokenURI(event.params.tokenId);
+      // if(!descriptorUri.reverted)
+      // {
+      //   collectible.descriptorURI = descriptorUri.value;
+      // }else{
+      //   collectible.descriptorURI = "";
+      // }
       collectible.save()
       log.info("MINT EVENT - TOKENID {}, TxHash {}", [collectibleId, event.transaction.hash.toHexString()])
     }

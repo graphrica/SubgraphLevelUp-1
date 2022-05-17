@@ -11,7 +11,7 @@ type Collectible @entity {
   creator: Account!
 
   tokenId: BigInt!
-  descriptorURI: String!
+  descriptorURI: String
 
   #timestamps
   modified: BigInt

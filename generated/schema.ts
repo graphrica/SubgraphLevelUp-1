@@ -64,7 +64,6 @@ export class Collectible extends Entity {
     this.set("owner", Value.fromString(""));
     this.set("creator", Value.fromString(""));
     this.set("tokenId", Value.fromBigInt(BigInt.zero()));
-    this.set("descriptorURI", Value.fromString(""));
   }
 
   save(): void {
@@ -129,13 +128,21 @@ export class Collectible extends Entity {
     this.set("tokenId", Value.fromBigInt(value));
   }
 
-  get descriptorURI(): string {
+  get descriptorURI(): string | null {
     let value = this.get("descriptorURI");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set descriptorURI(value: string) {
-    this.set("descriptorURI", Value.fromString(value));
+  set descriptorURI(value: string | null) {
+    if (!value) {
+      this.unset("descriptorURI");
+    } else {
+      this.set("descriptorURI", Value.fromString(<string>value));
+    }
   }
 
   get modified(): BigInt | null {
